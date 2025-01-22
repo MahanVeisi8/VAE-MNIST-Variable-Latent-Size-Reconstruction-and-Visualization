@@ -176,9 +176,9 @@ Below are the latent space visualizations for different latent sizes. The GIFs i
   </tr>
   <tr>
     <td>Latent Space Visualization</td>
-    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="350"></td>
-    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="350"></td>
-    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="350"></td>
+    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2"></td>
+    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4"></td>
+    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16"></td>
   </tr>
 </table>
 
