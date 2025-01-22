@@ -109,7 +109,8 @@ By enforcing this regularization, KL divergence encourages the model to learn a 
 
    Where the first term encourages accurate reconstruction of input data and the second term regularizes the latent space to align with a standard Gaussian prior.
 
-#### **Acknowledgments**  
+#### **Acknowledgments** 
+
 The mathematical explanations and formula illustrations in this section were adapted from [Justin Johnson's EECS 498-007: Deep Learning for Computer Vision](https://web.eecs.umich.edu/~justincj/teaching/eecs498/FA2020/). Credit goes to the original author for the insightful material and visualizations.
 ---
 
