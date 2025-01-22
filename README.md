@@ -176,9 +176,9 @@ Below are the latent space visualizations for different latent sizes. The GIFs i
   </tr>
   <tr>
     <td>Latent Space Visualization</td>
-    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="600"></td>
-    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="600"></td>
-    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="600"></td>
+    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="350"></td>
+    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="350"></td>
+    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="350"></td>
   </tr>
 </table>
 
@@ -193,15 +193,15 @@ Sample reconstructions of test images at various latent sizes:
   </tr>
   <tr>
     <td align="center">2</td>
-    <td><img src="assets/latent_2/sample_test_reconstruction.gif" alt="Reconstruction Latent 2" width="400"></td>
+    <td><img src="assets/latent_2/sample_test_reconstruction.gif" alt="Reconstruction Latent 2" width="600"></td>
   </tr>
   <tr>
     <td align="center">4</td>
-    <td><img src="assets/latent_4/sample_test_reconstruction.gif" alt="Reconstruction Latent 4" width="400"></td>
+    <td><img src="assets/latent_4/sample_test_reconstruction.gif" alt="Reconstruction Latent 4" width="600"></td>
   </tr>
   <tr>
     <td align="center">16</td>
-    <td><img src="assets/latent_16/sample_test_reconstruction.gif" alt="Reconstruction Latent 16" width="400"></td>
+    <td><img src="assets/latent_16/sample_test_reconstruction.gif" alt="Reconstruction Latent 16" width="600"></td>
   </tr>
 </table>
 
