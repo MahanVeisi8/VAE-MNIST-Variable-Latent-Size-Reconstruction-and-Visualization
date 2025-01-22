@@ -65,6 +65,24 @@ Below are reconstructions of test images (samples 1–5) at various latent sizes
 
 <table>
   <tr>
+    <td align="center"><strong>Latent Size: 2</strong></td>
+    <td><img src="assets/latent_2/sample_test_reconstruction.gif" alt="Reconstruction Latent 2" width="600"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Latent Size: 4</strong></td>
+    <td><img src="assets/latent_4/sample_test_reconstruction.gif" alt="Reconstruction Latent 4" width="600"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Latent Size: 16</strong></td>
+    <td><img src="assets/latent_16/sample_test_reconstruction.gif" alt="Reconstruction Latent 16" width="600"></td>
+  </tr>
+</table>
+
+---
+### 2. **Latent Space Visualizations**
+
+These visualizations highlight how the latent space evolves with different latent sizes. Each GIF shows the latent space for the test set during training.<table>
+  <tr>
     <th>Latent Size</th>
     <th>Latent 2</th>
     <th>Latent 4</th>
@@ -72,34 +90,12 @@ Below are reconstructions of test images (samples 1–5) at various latent sizes
   </tr>
   <tr>
     <td align="center">Latent Space Visualization</td>
-    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="300"></td>
-    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="300"></td>
-    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="300"></td>
+    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="350"></td>
+    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="350"></td>
+    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="350"></td>
   </tr>
 </table>
 
----
-### 2. **Latent Space Visualizations**
-
-These visualizations highlight how the latent space evolves with different latent sizes. Each GIF shows the latent space for the test set during training.
-<table>
-  <tr>
-    <th>Latent Size</th>
-    <th colspan="3">Latent Space Visualization</th>
-  </tr>
-  <tr>
-    <td align="center">Latent 2</td>
-    <td colspan="3" align="center"><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="300"></td>
-  </tr>
-  <tr>
-    <td align="center">Latent 4</td>
-    <td colspan="3" align="center"><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="300"></td>
-  </tr>
-  <tr>
-    <td align="center">Latent 16</td>
-    <td colspan="3" align="center"><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="300"></td>
-  </tr>
-</table>
 
 ---
 
