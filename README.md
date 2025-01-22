@@ -193,15 +193,15 @@ Sample reconstructions of test images at various latent sizes:
   </tr>
   <tr>
     <td align="center">2</td>
-    <td><img src="assets/latent_2/sample_test_reconstruction.gif" alt="Reconstruction Latent 2" width="600"></td>
+    <td><img src="assets/latent_2/sample_test_reconstruction.gif" alt="Reconstruction Latent 2" width="800"></td>
   </tr>
   <tr>
     <td align="center">4</td>
-    <td><img src="assets/latent_4/sample_test_reconstruction.gif" alt="Reconstruction Latent 4" width="600"></td>
+    <td><img src="assets/latent_4/sample_test_reconstruction.gif" alt="Reconstruction Latent 4" width="800"></td>
   </tr>
   <tr>
     <td align="center">16</td>
-    <td><img src="assets/latent_16/sample_test_reconstruction.gif" alt="Reconstruction Latent 16" width="600"></td>
+    <td><img src="assets/latent_16/sample_test_reconstruction.gif" alt="Reconstruction Latent 16" width="800"></td>
   </tr>
 </table>
 
