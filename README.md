@@ -40,13 +40,13 @@ This project investigates how the size of the latent space in VAEs affects image
 Metrics such as **MSE**, **SSIM**, and **PSNR** were tracked during training for both train and test sets. Below are the results for different latent sizes.
 
 #### **Latent Size: 2**
-![Metrics Latent 2](assets/latent_2/plots/test_metrics_summary.png)
+![Metrics Latent 2](assets/latent_2/plots.png)
 
 #### **Latent Size: 4**
-![Metrics Latent 4](assets/latent_4/plots/test_metrics_summary.png)
+![Metrics Latent 4](assets/latent_4/plots.png)
 
 #### **Latent Size: 16**
-![Metrics Latent 16](assets/latent_16/plots/test_metrics_summary.png)
+![Metrics Latent 16](assets/latent_16/plots.png)
 
 ---
 
