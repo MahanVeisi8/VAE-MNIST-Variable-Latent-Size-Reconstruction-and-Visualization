@@ -123,6 +123,8 @@ The Variational Autoencoder (VAE) implemented in this project features a **U-Net
 
 ![VAE Architecture](assets/VAE_Model.jpg)
 
+Variational Autoencoder Model Architecture image took from [This page](https://medium.com/@rushikesh.shende/autoencoders-variational-autoencoders-vae-and-%CE%B2-vae-ceba9998773d).
+
 #### **Encoder**  
 The encoder compresses input images into a latent distribution characterized by:
 - **Mean (μ)** and **Variance (σ²)**, which define the latent space.
@@ -157,7 +159,7 @@ These methods ensure reconstructions are both **visually realistic** and **seman
 ### **Acknowledgments**  
 This project is inspired by [ExplainingAI-Code/VAE-Pytorch](https://github.com/explainingai-code/VAE-Pytorch) and incorporates ideas from the work of Zhang et al. (2018):  
 Zhang, R., Isola, P., Efros, A. A., Shechtman, E., & Wang, O. (2018). *The unreasonable effectiveness of deep features as a perceptual metric*.  
-[Read the paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Zhang_The_Unreasonable_Effectiveness_CVPR_2018_paper.pdf).
+
 
 
 ---
