@@ -121,7 +121,7 @@ The mathematical explanations and formula illustrations in this section were ada
 
 The Variational Autoencoder (VAE) implemented in this project features a **U-Net-inspired design** with **DownBlocks**, **MidBlocks**, and **UpBlocks**, enhanced by **self-attention** and **cross-attention** mechanisms for precise feature extraction and reconstruction.
 
-![VAE Architecture](assets/VAE_Model.png)
+![VAE Architecture](assets/VAE_Model.jpg)
 
 #### **Encoder**  
 The encoder compresses input images into a latent distribution characterized by:
