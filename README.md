@@ -128,14 +128,12 @@ Variational Autoencoder Model Architecture image took from [This page](https://m
 #### **Encoder**  
 The encoder compresses input images into a latent distribution characterized by:
 - **Mean (μ)** and **Variance (σ²)**, which define the latent space.
-- A **reparameterization trick** for differentiable sampling:  
-\[
-z = \mu + \sigma \cdot \epsilon, \quad \epsilon \sim \mathcal{N}(0, 1)
-\]
+- A **reparameterization trick** for differentiable sampling.
+
 This ensures smooth and continuous latent representations, critical for generation and generalization.
 
 #### **Decoder**  
-The decoder reconstructs images from the latent vector \(z\), using:
+The decoder reconstructs images from the latent vector z, using:
 - **Upsampling layers** to restore resolution.
 - **Skip connections** to retain fine-grained details.
 - **Self-attention** to maintain global coherence.
