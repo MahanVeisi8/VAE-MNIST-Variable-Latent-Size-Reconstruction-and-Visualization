@@ -41,14 +41,17 @@ Metrics such as **MSE**, **SSIM**, and **PSNR** were tracked during training for
 
 #### **Latent Size: 2**
 ![Metrics train Latent 2](assets/latent_2/train_plots.png)
+
 ![Metrics test Latent 2](assets/latent_2/test_plots.png)
 
 #### **Latent Size: 4**
 ![Metrics train Latent 4](assets/latent_4/train_plots.png)
+
 ![Metrics test Latent 4](assets/latent_4/test_plots.png)
 
 #### **Latent Size: 16**
 ![Metrics train Latent 16](assets/latent_16/train_plots.png)
+
 ![Metrics test Latent 16](assets/latent_16/test_plots.png)
 
 
