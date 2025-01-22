@@ -82,41 +82,32 @@ Variational Autoencoders (VAEs) extend traditional Autoencoders (AEs) by introdu
    Since D_KL >= 0, maximizing the ELBO brings us closer to the true log-likelihood p(x).
 
 ---
+5. **KL Divergence Loss**
 
-5. **Key Terms in the ELBO**  
-   The ELBO itself can be decomposed into two terms:
+The **Kullback-Leibler (KL) Divergence** measures the difference between the learned latent distribution q_phi(z|x) (produced by the encoder) and the prior distribution p(z) (usually a standard Gaussian N(0, 1):
 
-   - **Reconstruction Loss**: Measures how well the reconstructed data \( \hat{x} \) matches the original input \( x \). This term is:
+   ![KL Div](assets/KL_Div.png)
 
-     \[
-     \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)]
-     \]
 
-     This ensures the decoder generates outputs similar to the input.
+This is a statistical measure to ensure the generated latent space distribution aligns closely with the desired prior distribution.
 
-   - **KL Divergence Loss**: Measures the difference between the approximate posterior \( q_\phi(z|x) \) and the prior \( p(z) \). This term is:
+### **Why is KL Divergence Important?**
 
-     \[
-     D_{KL}(q_\phi(z|x) \parallel p(z))
-     \]
+1. **Latent Space Regularization**: Ensures that the latent space is smooth, continuous, and well-organized, making it easier to sample meaningful latent vectors.
+2. **Avoiding Overfitting**: Without the KL term, the latent space may overfit the training data, losing generalization to new, unseen inputs.
+3. **Generative Capabilities**: A structured latent space ensures that new samples generated from the prior distribution resemble the training data.
 
-     This regularizes the latent space, ensuring it follows a Gaussian prior.
+By enforcing this regularization, KL divergence encourages the model to learn a meaningful and generative latent space.
 
 ---
 
 6. **Final Loss Function**  
-   Combining these, the VAE loss function becomes:
+   Combining these, the VAE goal is to maximizing the lower bound:
 
-   \[
-   \mathcal{L}_{VAE} = \mathcal{L}_{Recon} + \mathcal{L}_{KL}
-   \]
+   ![two terms](assets/two_terms.png)
 
-   Where:
-   - \( \mathcal{L}_{Recon} \): Encourages accurate reconstruction of input data.
-   - \( \mathcal{L}_{KL} \): Regularizes the latent space to align with a standard Gaussian prior.
 
-By training the VAE to optimize the ELBO, we effectively learn both a meaningful latent space and the ability to generate realistic data samples.
-
+   Where the first term encourages accurate reconstruction of input data and the second term regularizes the latent space to align with a standard Gaussian prior.
 
 ---
 
