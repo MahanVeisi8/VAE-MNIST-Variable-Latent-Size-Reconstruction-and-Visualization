@@ -65,16 +65,16 @@ Below are reconstructions of test images (samples 1–5) at various latent sizes
 
 <table>
   <tr>
-    <td align="center"><strong>Latent Size: 2</strong></td>
-    <td><img src="assets/latent_2/sample_test_reconstruction.gif" alt="Reconstruction Latent 2" width="600"></td>
+    <th>Latent Size</th>
+    <th>Latent 2</th>
+    <th>Latent 4</th>
+    <th>Latent 16</th>
   </tr>
   <tr>
-    <td align="center"><strong>Latent Size: 4</strong></td>
-    <td><img src="assets/latent_4/sample_test_reconstruction.gif" alt="Reconstruction Latent 4" width="600"></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Latent Size: 16</strong></td>
-    <td><img src="assets/latent_16/sample_test_reconstruction.gif" alt="Reconstruction Latent 16" width="600"></td>
+    <td align="center">Latent Space Visualization</td>
+    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="200"></td>
+    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="200"></td>
+    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="200"></td>
   </tr>
 </table>
 
