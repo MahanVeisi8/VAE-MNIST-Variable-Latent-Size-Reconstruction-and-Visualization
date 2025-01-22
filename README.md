@@ -40,39 +40,87 @@ Variational Autoencoders (VAEs) extend traditional Autoencoders (AEs) by introdu
 
 ## **Core Concepts**
 
+
+
 ### **Mathematical Framework**
 
-The goal of a VAE is to optimize the evidence lower bound (ELBO) to approximate the true data likelihood \(p(x)\):
+1. **Maximizing Data Likelihood**  
+   The primary goal of a Variational Autoencoder is to maximize the likelihood of the observed data p(x). This is expressed as:
 
-\[
-\log p(x) = \text{ELBO} + \text{KL}(q_\phi(z|x) || p(z|x))
-\]
+   ![Maximizing Data Likelihood](assets/MaximizingDataLikelihood.png)
+   ![Integral ](assets/integral.png)
 
-#### **1. Reconstruction Loss**
-Measures the difference between the original input \(x\) and its reconstruction \(\hat{x}\):
+   However, solving this integral is **intractable** because integrating over all possible \( z \) is computationally expensive.
 
-- For continuous data: Mean Squared Error (MSE)
-- For binary data: Binary Cross-Entropy (BCE)
+---
 
-This term ensures that the decoder reconstructs the input data accurately based on the latent representation.
+2. **Bayes' Rule Approximation**  
+   To address this, Bayes' rule is applied:
 
-#### **2. KL Divergence Loss**
-Regularizes the latent space by minimizing the divergence between the learned posterior \(q_\phi(z|x)\) and the prior \(p(z)\):
+   \[
+   p(x) = \int \frac{p_\theta(x|z)p_\theta(z)}{p_\theta(z|x)} dz
+   \]
 
-\[
-D_{KL}(q_\phi(z|x) \parallel p(z)) = \int q_\phi(z|x) \log \frac{q_\phi(z|x)}{p(z)} dz
-\]
+   But there’s a new problem: computing \( p_\theta(z|x) \) is still challenging because it involves knowledge of the posterior, which is also intractable.
 
-This encourages the learned latent distribution to approximate a unit Gaussian (\(N(0,1)\)).
+---
 
-#### **Combined Loss**
-The total VAE loss is a weighted sum of the reconstruction and KL divergence terms:
+3. **Neural Network as an Estimator**  
+   To approximate \( p_\theta(z|x) \), we use a neural network \( q_\phi(z|x) \) to act as the posterior. This is referred to as the variational posterior and makes the computation feasible.
 
-\[
-\mathcal{L}_{VAE} = \mathcal{L}_{Recon} + \beta \cdot \mathcal{L}_{KL}
-\]
+   Now, instead of directly computing the likelihood \( p(x) \), the focus shifts to maximizing a lower bound called the **Evidence Lower Bound (ELBO)**.
 
-Where \( \beta \) (beta-VAE) can adjust the balance between reconstruction accuracy and latent space regularization.
+---
+
+4. **Decomposing the ELBO**  
+   Using the new approximation, the logarithm of \( p(x) \) can be rewritten as:
+
+   \[
+   \log p_\theta(x) = \text{ELBO} + D_{KL}(q_\phi(z|x) || p_\theta(z|x))
+   \]
+
+   Here:
+   - **ELBO**: Evidence Lower Bound, which we aim to maximize during training.
+   - \( D_{KL} \): Kullback-Leibler divergence between \( q_\phi(z|x) \) and the true posterior \( p_\theta(z|x) \).
+
+   Since \( D_{KL} \geq 0 \), maximizing the ELBO brings us closer to the true log-likelihood \( \log p(x) \).
+
+---
+
+5. **Key Terms in the ELBO**  
+   The ELBO itself can be decomposed into two terms:
+
+   - **Reconstruction Loss**: Measures how well the reconstructed data \( \hat{x} \) matches the original input \( x \). This term is:
+
+     \[
+     \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)]
+     \]
+
+     This ensures the decoder generates outputs similar to the input.
+
+   - **KL Divergence Loss**: Measures the difference between the approximate posterior \( q_\phi(z|x) \) and the prior \( p(z) \). This term is:
+
+     \[
+     D_{KL}(q_\phi(z|x) \parallel p(z))
+     \]
+
+     This regularizes the latent space, ensuring it follows a Gaussian prior.
+
+---
+
+6. **Final Loss Function**  
+   Combining these, the VAE loss function becomes:
+
+   \[
+   \mathcal{L}_{VAE} = \mathcal{L}_{Recon} + \mathcal{L}_{KL}
+   \]
+
+   Where:
+   - \( \mathcal{L}_{Recon} \): Encourages accurate reconstruction of input data.
+   - \( \mathcal{L}_{KL} \): Regularizes the latent space to align with a standard Gaussian prior.
+
+By training the VAE to optimize the ELBO, we effectively learn both a meaningful latent space and the ability to generate realistic data samples.
+
 
 ---
 
