@@ -115,50 +115,50 @@ The mathematical explanations and formula illustrations in this section were ada
 
 ---
 
-### **Encoder and Decoder Roles**
 
-1. **Encoder**:
-   - Maps input data \(x\) to a latent distribution characterized by:
-     - Mean (\(\mu\)) 
-     - Variance (\(\sigma^2\))
-   - Outputs the parameters for sampling latent representations \(z \sim \mathcal{N}(\mu, \sigma^2)\).
 
-2. **Decoder**:
-   - Maps sampled latent vectors \(z\) back to the data space.
-   - Outputs the reconstructed data \(\hat{x}\).
+### **Architecture Overview**
+
+The Variational Autoencoder (VAE) implemented in this project features a **U-Net-inspired design** with **DownBlocks**, **MidBlocks**, and **UpBlocks**, enhanced by **self-attention** and **cross-attention** mechanisms for precise feature extraction and reconstruction.
+
+![VAE Architecture](assets/VAE_Model.png)
+
+#### **Encoder**  
+The encoder compresses input images into a latent distribution characterized by:
+- **Mean (μ)** and **Variance (σ²)**, which define the latent space.
+- A **reparameterization trick** for differentiable sampling:  
+\[
+z = \mu + \sigma \cdot \epsilon, \quad \epsilon \sim \mathcal{N}(0, 1)
+\]
+This ensures smooth and continuous latent representations, critical for generation and generalization.
+
+#### **Decoder**  
+The decoder reconstructs images from the latent vector \(z\), using:
+- **Upsampling layers** to restore resolution.
+- **Skip connections** to retain fine-grained details.
+- **Self-attention** to maintain global coherence.
 
 ---
 
-### **Sampling with Reparameterization Trick**
+### **Enhancing Reconstructions**
 
-Since direct backpropagation through stochastic sampling is not feasible, VAEs employ the **reparameterization trick**:
+To address the common issue of **blurry outputs** with pixel-wise losses (e.g., L2), this implementation integrates **adversarial feedback** and **perceptual metrics**:
 
-\[
-z = \mu + \sigma \cdot \epsilon
-\]
+1. **PatchGAN Discriminator**  
+   A discriminator evaluates image patches, encouraging the model to produce sharper, more realistic textures.
 
-Where \(\epsilon \sim \mathcal{N}(0, 1)\) is a random noise vector. This enables gradient-based optimization while allowing latent space sampling.
+2. **Perceptual Loss (VGG16)**  
+   Inspired by Zhang et al. (2018), "The Unreasonable Effectiveness of Deep Features as a Perceptual Metric," perceptual loss compares features extracted by a pre-trained VGG16 model. This improves semantic coherence and enhances visual sharpness by prioritizing high-level details over pixel-level accuracy.
+
+These methods ensure reconstructions are both **visually realistic** and **semantically meaningful**.
 
 ---
 
-## **Model Architecture**
+### **Acknowledgments**  
+This project is inspired by [ExplainingAI-Code/VAE-Pytorch](https://github.com/explainingai-code/VAE-Pytorch) and incorporates ideas from the work of Zhang et al. (2018):  
+Zhang, R., Isola, P., Efros, A. A., Shechtman, E., & Wang, O. (2018). *The unreasonable effectiveness of deep features as a perceptual metric*.  
+[Read the paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Zhang_The_Unreasonable_Effectiveness_CVPR_2018_paper.pdf).
 
-### **Encoder**
-Maps input images \( x \) to a latent distribution \( q(z|x) \) characterized by:
-- Mean (\( \mu \))
-- Variance (\( \sigma^2 \))
-
-### **Latent Sampling**
-To enable backpropagation through the probabilistic latent space, VAE employs the **reparameterization trick**:
-
-\[
- z = \mu + \sigma \cdot \epsilon, \quad \epsilon \sim \mathcal{N}(0, 1)
-\]
-
-### **Decoder**
-Generates reconstructions \( \hat{x} \) from sampled latent vectors \( z \).
-
-![VAE Architecture](assets/vae_architecture.png)
 
 ---
 
