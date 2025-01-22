@@ -56,34 +56,30 @@ Variational Autoencoders (VAEs) extend traditional Autoencoders (AEs) by introdu
 
 2. **Bayes' Rule Approximation**  
    To address this, Bayes' rule is applied:
+   ![Maximizing Data Likelihood](assets/Bayes.png)
 
-   \[
-   p(x) = \int \frac{p_\theta(x|z)p_\theta(z)}{p_\theta(z|x)} dz
-   \]
-
-   But there’s a new problem: computing \( p_\theta(z|x) \) is still challenging because it involves knowledge of the posterior, which is also intractable.
+   But there’s a new problem: computing p_theta(z|x) is still challenging because it involves knowledge of the posterior, which is also intractable.
 
 ---
 
 3. **Neural Network as an Estimator**  
-   To approximate \( p_\theta(z|x) \), we use a neural network \( q_\phi(z|x) \) to act as the posterior. This is referred to as the variational posterior and makes the computation feasible.
+   To approximate p_theta(z|x), we use a neural network q_phi(z|x) to act as the posterior. This is referred to as the variational posterior and makes the computation feasible.
+   ![Reparameterization Trick](assets/reparameterizationTrick.png)
 
-   Now, instead of directly computing the likelihood \( p(x) \), the focus shifts to maximizing a lower bound called the **Evidence Lower Bound (ELBO)**.
+   Now, instead of directly computing the likelihood p(x), the focus shifts to maximizing a lower bound called the **Evidence Lower Bound (ELBO)**.
 
 ---
 
 4. **Decomposing the ELBO**  
-   Using the new approximation, the logarithm of \( p(x) \) can be rewritten as:
+   Using the new approximation, the logarithm of p(x) can be rewritten as:
 
-   \[
-   \log p_\theta(x) = \text{ELBO} + D_{KL}(q_\phi(z|x) || p_\theta(z|x))
-   \]
-
+   ![Reparameterization Trick](assets/Decomposing.png)
+   
    Here:
    - **ELBO**: Evidence Lower Bound, which we aim to maximize during training.
-   - \( D_{KL} \): Kullback-Leibler divergence between \( q_\phi(z|x) \) and the true posterior \( p_\theta(z|x) \).
+   - D_KL: Kullback-Leibler divergence between q_phi(z|x) and the true posterior p_theta(z|x).
 
-   Since \( D_{KL} \geq 0 \), maximizing the ELBO brings us closer to the true log-likelihood \( \log p(x) \).
+   Since D_KL >= 0, maximizing the ELBO brings us closer to the true log-likelihood p(x).
 
 ---
 
