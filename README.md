@@ -225,12 +225,6 @@ Training metrics, including **MSE**, **SSIM**, and **PSNR**, were tracked for tr
 
 ---
 
-## **References and Credits**
-
-1. **Images and Concepts**: Thanks to authors and resources such as [source 1](#) and [source 2](#) for providing visualizations.
-2. **Math Formulas**: KL Divergence explanations were adapted from authoritative ML texts.
-
----
 
 ### 🚀 Happy Experimenting!
 
