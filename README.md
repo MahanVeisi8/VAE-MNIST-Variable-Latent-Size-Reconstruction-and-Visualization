@@ -209,8 +209,6 @@ Sample reconstructions of test images at various latent sizes:
 
 ## **Metrics Tracking**
 
-Training metrics, including **MSE**, **SSIM**, and **PSNR**, were tracked for train and test sets. Here are the plots for each latent size:
-
 ### Latent Size: 2
 ![Metrics train Latent 2](assets/latent_2/train_plots.png)
 ![Metrics test Latent 2](assets/latent_2/test_plots.png)
@@ -223,28 +221,15 @@ Training metrics, including **MSE**, **SSIM**, and **PSNR**, were tracked for tr
 ![Metrics train Latent 16](assets/latent_16/train_plots.png)
 ![Metrics test Latent 16](assets/latent_16/test_plots.png)
 
-### **Training Metrics**
 
-The training process tracked the following key metrics across all latent sizes: **Reconstruction Loss**, **Perceptual Loss**, **Generator Loss**, and **Discriminator Loss**.
+## **Comparison**
 
-#### Observations:
-1. **Reconstruction Loss**:
-   - A consistent decrease across all latent sizes indicates effective learning during training.
-   - Latent size 2 showed the fastest convergence, likely due to the simplicity of the latent representation.
-   - Latent sizes 4 and 16 exhibited slightly slower convergence but achieved comparable final values, suggesting more complex latent spaces require additional iterations to optimize.
+| **Latent Size** | **MSE**   | **SSIM**  | **PSNR**  |
+|-----------------|-----------|-----------|-----------|
+| **16**         | 0.0013    | 0.9919    | 35.5396   |
+| **4**          | 0.0025    | 0.9847    | 32.8133   |
+| **2**          | 0.0040    | 0.9803    | 30.5386   |
 
-2. **Perceptual Loss**:
-   - The perceptual loss rapidly decreased in the initial epochs for all latent sizes, highlighting the model's ability to capture high-level features early in training.
-   - Smaller latent sizes (e.g., 2) demonstrated slightly lower perceptual loss values at convergence, suggesting they rely more heavily on perceptual quality.
-
-3. **Generator and Discriminator Losses**:
-   - These losses stabilize after initial fluctuations, indicating the adversarial component integrates well after the primary reconstruction phase.
-   - Early training focuses solely on reconstruction (with no adversarial loss), ensuring a robust baseline before introducing the GAN component.
-   - Discriminator loss stabilizes higher for larger latent sizes, reflecting a more challenging adversarial training due to increased model capacity.
-
-#### Comparison:
-- Smaller latent sizes (e.g., 2) are quicker to optimize but may sacrifice diversity in representation.
-- Larger latent sizes (e.g., 16) converge slightly slower but allow for a richer latent space, improving performance in later epochs.
 
 
 ---
