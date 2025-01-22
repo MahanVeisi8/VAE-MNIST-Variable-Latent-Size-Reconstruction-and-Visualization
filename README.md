@@ -1,7 +1,7 @@
 # **Variational Autoencoders (VAE) for MNIST Dataset**
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1M9R-see6buUaLwAm2bcJuihywgW14ebw?usp=sharing)
-[![Python](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org/downloads/release/python-380/)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1M9R-see6buUaLwAm2bcJuihywgW14ebw?usp=sharing)  
+[![Python](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org/downloads/release/python-380/)  
 [![Status](https://img.shields.io/badge/status-active-green)]()
 
 Welcome to this project exploring **Variational Autoencoders (VAE)** on the **MNIST** dataset! 🚀
@@ -18,70 +18,109 @@ This repository demonstrates training VAEs with different latent sizes (2, 4, an
 
 ## **Overview**
 
-This project investigates how the size of the latent space in VAEs affects image reconstruction quality and latent space structure. For each latent size, metrics like **MSE**, **SSIM**, and **PSNR** are tracked, along with visualizations of reconstructions and latent spaces.
+Variational Autoencoders (VAEs) extend traditional Autoencoders (AEs) by introducing a **probabilistic framework** to the latent space. This enhancement provides better generalization, continuity, and the ability to generate new data samples.
+
+Key distinctions include:
+
+### **Standard Autoencoder**
+- Maps input data deterministically to a fixed latent representation.
+- Lacks the ability to generate new samples or capture data variability.
+
+### **Variational Autoencoder (VAE)**
+- Models the latent space as a **probability distribution**, typically Gaussian.
+- Enables sampling from the latent space for data generation.
+- Includes a **KL Divergence** term in the loss to regularize the latent space.
+
+Here is an illustrative comparison:
+
+![AE vs VAE](assets/autoencoder_vs_vae.png)
+
+The following sections explore the VAE structure, its mathematical formulation, and experimental results on the MNIST dataset.
 
 ---
 
-## **Key Features**
+## **Core Concepts**
 
-1. **Latent Space Visualization**
-    - Explore the structure of latent spaces for various latent sizes.
-2. **Reconstruction Comparison**
-    - Compare original and reconstructed images at different latent sizes.
-3. **Metrics Tracking**
-    - Analyze MSE, SSIM, and PSNR during training.
-4. **Dynamic GIFs**
-    - Animated visualizations of reconstruction and latent space evolution.
+### **Latent Space in VAE**
+In a standard AE, the encoder maps input data to a fixed latent vector. In contrast, VAE encodes inputs into a probabilistic distribution, allowing the latent space to:
+
+1. **Encourage Continuity**: Similar inputs yield close latent encodings.
+2. **Enable Sampling**: Random samples from the distribution generate diverse and realistic outputs.
+
+Key advantages of this design:
+- Smoother latent space.
+- Improved generalization.
+- Capability to generate new, meaningful data.
+
+### **Mathematical Formulation**
+
+The VAE loss combines two terms:
+
+1. **Reconstruction Loss**
+   Measures how accurately the model reconstructs the input data:
+
+   \[
+   \mathcal{L}_{Recon} = \text{MSE}(x, \hat{x})
+   \]
+
+   or Binary Cross-Entropy (BCE) for binary inputs:
+
+   \[
+   \mathcal{L}_{Recon} = -\mathbb{E}_{q(z|x)} \left[\log p(x|z)\right]
+   \]
+
+2. **KL Divergence Loss**
+   Regularizes the latent space by enforcing similarity between the learned distribution \( q(z|x) \) and a standard Gaussian prior \( p(z) \):
+
+   \[
+   \mathcal{L}_{KL} = D_{KL}\left(q(z|x) \parallel p(z)\right)
+   \]
+
+   KL Divergence is given by:
+
+   \[
+   D_{KL}(P \parallel Q) = \sum P(x) \log\left(\frac{P(x)}{Q(x)}\right)
+   \]
+
+The total VAE loss is:
+
+\[
+\mathcal{L}_{VAE} = \mathcal{L}_{Recon} + \beta \cdot \mathcal{L}_{KL}
+\]
+
+Where \( \beta \) controls the weight of the KL term.
+
+![KL Divergence](assets/kl_divergence_visual.png)
 
 ---
 
-## **Training plots**
+## **Model Architecture**
 
-Metrics such as **MSE**, **SSIM**, and **PSNR** were tracked during training for both train and test sets. Below are the results for different latent sizes.
+### **Encoder**
+Maps input images \( x \) to a latent distribution \( q(z|x) \) characterized by:
+- Mean (\( \mu \))
+- Variance (\( \sigma^2 \))
 
-#### **Latent Size: 2**
-![Metrics train Latent 2](assets/latent_2/train_plots.png)
+### **Latent Sampling**
+To enable backpropagation through the probabilistic latent space, VAE employs the **reparameterization trick**:
 
-![Metrics test Latent 2](assets/latent_2/test_plots.png)
+\[
+ z = \mu + \sigma \cdot \epsilon, \quad \epsilon \sim \mathcal{N}(0, 1)
+\]
 
-#### **Latent Size: 4**
-![Metrics train Latent 4](assets/latent_4/train_plots.png)
+### **Decoder**
+Generates reconstructions \( \hat{x} \) from sampled latent vectors \( z \).
 
-![Metrics test Latent 4](assets/latent_4/test_plots.png)
-
-#### **Latent Size: 16**
-![Metrics train Latent 16](assets/latent_16/train_plots.png)
-
-![Metrics test Latent 16](assets/latent_16/test_plots.png)
-
+![VAE Architecture](assets/vae_architecture.png)
 
 ---
 
-## **Results and Visualizations**
+## **Experimental Results**
 
-### 1. **Sample Reconstructions**
-
-Below are reconstructions of test images (samples 1–5) at various latent sizes. The GIFs capture reconstruction evolution during training.
+### **Latent Space Visualization**
+Below are the latent space visualizations for different latent sizes. The GIFs illustrate how the latent space evolves during training.
 
 <table>
-  <tr>
-    <td align="center"><strong>Latent Size: 2</strong></td>
-    <td><img src="assets/latent_2/sample_test_reconstruction.gif" alt="Reconstruction Latent 2" width="600"></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Latent Size: 4</strong></td>
-    <td><img src="assets/latent_4/sample_test_reconstruction.gif" alt="Reconstruction Latent 4" width="600"></td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Latent Size: 16</strong></td>
-    <td><img src="assets/latent_16/sample_test_reconstruction.gif" alt="Reconstruction Latent 16" width="600"></td>
-  </tr>
-</table>
-
----
-### 2. **Latent Space Visualizations**
-
-These visualizations highlight how the latent space evolves with different latent sizes. Each GIF shows the latent space for the test set during training.<table>
   <tr>
     <th>Latent Size</th>
     <th>Latent 2</th>
@@ -89,51 +128,60 @@ These visualizations highlight how the latent space evolves with different laten
     <th>Latent 16</th>
   </tr>
   <tr>
-    <td align="center">Latent Space Visualization</td>
+    <td>Latent Space Visualization</td>
     <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="350"></td>
     <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="350"></td>
     <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="350"></td>
   </tr>
 </table>
 
+### **Reconstruction Results**
+
+Sample reconstructions of test images at various latent sizes:
+
+<table>
+  <tr>
+    <th>Latent Size</th>
+    <th>Reconstruction GIF</th>
+  </tr>
+  <tr>
+    <td align="center">2</td>
+    <td><img src="assets/latent_2/sample_test_reconstruction.gif" alt="Reconstruction Latent 2" width="400"></td>
+  </tr>
+  <tr>
+    <td align="center">4</td>
+    <td><img src="assets/latent_4/sample_test_reconstruction.gif" alt="Reconstruction Latent 4" width="400"></td>
+  </tr>
+  <tr>
+    <td align="center">16</td>
+    <td><img src="assets/latent_16/sample_test_reconstruction.gif" alt="Reconstruction Latent 16" width="400"></td>
+  </tr>
+</table>
 
 ---
 
-## **Technical Details**
+## **Metrics Tracking**
 
-### Variational Autoencoder (VAE)
+Training metrics, including **MSE**, **SSIM**, and **PSNR**, were tracked for train and test sets. Here are the plots for each latent size:
 
-The VAE consists of:
-- **Encoder**: Maps input images to a latent distribution.
-- **Decoder**: Reconstructs images from the latent distribution.
+### Latent Size: 2
+![Metrics train Latent 2](assets/latent_2/train_plots.png)
+![Metrics test Latent 2](assets/latent_2/test_plots.png)
 
-### Loss Function
+### Latent Size: 4
+![Metrics train Latent 4](assets/latent_4/train_plots.png)
+![Metrics test Latent 4](assets/latent_4/test_plots.png)
 
-The VAE loss combines **reconstruction loss** and **KL divergence**:
-
-<p align="center">
-\[ \mathcal{L}_{VAE} = \mathcal{L}_{Recon} + \beta \cdot \mathcal{L}_{KL} \]
-</p>
-
-Where:
-- \( \mathcal{L}_{Recon} \): Mean Squared Error (MSE) between original and reconstructed images.
-- \( \mathcal{L}_{KL} \): KL divergence between latent distribution and a standard Gaussian.
-- \( \beta \): Weight for the KL term.
-
-### Metrics
-
-1. **MSE (Mean Squared Error)**
-2. **SSIM (Structural Similarity Index)**
-3. **PSNR (Peak Signal-to-Noise Ratio)**
-
+### Latent Size: 16
+![Metrics train Latent 16](assets/latent_16/train_plots.png)
+![Metrics test Latent 16](assets/latent_16/test_plots.png)
 
 ---
 
-## **Future Directions**
+## **References and Credits**
 
-- 🧱 Experiment with higher latent sizes.
-- 🔄 Apply the method to complex datasets like CIFAR-10.
-- 📈 Improve reconstruction quality using perceptual losses.
+1. **Images and Concepts**: Thanks to authors and resources such as [source 1](#) and [source 2](#) for providing visualizations.
+2. **Math Formulas**: KL Divergence explanations were adapted from authoritative ML texts.
 
 ---
 
