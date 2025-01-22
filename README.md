@@ -22,16 +22,13 @@ Variational Autoencoders (VAEs) extend traditional Autoencoders (AEs) by introdu
 
 ### **Key Differences: Standard AE vs VAE**
 
-#### **Standard Autoencoder (AE):**
-
-- **Deterministic Mapping**: Encodes data to a fixed latent representation.
-- **No Sampling**: Outputs are reconstructed directly from deterministic encodings, preventing generative capabilities.
-- **Reconstruction Only**: Focuses solely on accurately reconstructing the input data without learning meaningful latent space properties.
-
-#### **Variational Autoencoder (VAE):**
-- **Probabilistic Mapping**: Encodes data into a latent distribution (mean and variance) rather than a fixed vector.
-- **Sampling Capabilities**: Enables generation of new data points by sampling from the learned latent space.
-- **Latent Space Regularization**: Introduces a **KL Divergence** loss term to enforce smoothness and continuity in the latent space.
+| Feature                          | **Standard Autoencoder (AE)**                                     | **Variational Autoencoder (VAE)**                            |
+|----------------------------------|-------------------------------------------------------------------|-------------------------------------------------------------|
+| **Mapping Type**                 | Deterministic: Encodes data to a fixed latent representation.     | Probabilistic: Encodes data into a latent distribution (mean and variance). |
+| **Sampling**                     | No Sampling: Reconstructs outputs directly from deterministic encodings. | Supports Sampling: Enables generation of new data points by sampling from the latent space. |
+| **Latent Space Regularization**  | None: Focuses on reconstruction accuracy only.                   | Uses **KL Divergence** to enforce smoothness and continuity in the latent space. |
+| **Generative Capabilities**      | Limited: Cannot generate new data samples.                       | Powerful: Can generate diverse and realistic data samples. |
+| **Focus**                        | Solely on reconstruction of input data.                          | Balances reconstruction and latent space organization for generative tasks. |
 
 ### **Why Probabilistic Latent Space?**
 
