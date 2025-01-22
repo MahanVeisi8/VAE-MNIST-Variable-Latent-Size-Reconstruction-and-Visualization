@@ -72,9 +72,9 @@ Below are reconstructions of test images (samples 1–5) at various latent sizes
   </tr>
   <tr>
     <td align="center">Latent Space Visualization</td>
-    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="200"></td>
-    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="200"></td>
-    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="200"></td>
+    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="300"></td>
+    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="300"></td>
+    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="300"></td>
   </tr>
 </table>
 
