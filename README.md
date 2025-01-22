@@ -33,7 +33,7 @@ Key distinctions include:
 
 Here is an illustrative comparison:
 
-![AE vs VAE](assets/autoencoder_vs_vae.png)
+![AE vs VAE](assets/autoencoder_vs_vae.jpg)
 
 The following sections explore the VAE structure, its mathematical formulation, and experimental results on the MNIST dataset.
 
@@ -83,6 +83,9 @@ The VAE loss combines two terms:
    \]
 
 The total VAE loss is:
+
+![loss](assets/loss.jpg)
+
 
 \[
 \mathcal{L}_{VAE} = \mathcal{L}_{Recon} + \beta \cdot \mathcal{L}_{KL}
