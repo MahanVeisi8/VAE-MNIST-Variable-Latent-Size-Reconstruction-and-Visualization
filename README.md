@@ -20,80 +20,88 @@ This repository demonstrates training VAEs with different latent sizes (2, 4, an
 
 Variational Autoencoders (VAEs) extend traditional Autoencoders (AEs) by introducing a **probabilistic framework** to the latent space. This enhancement provides better generalization, continuity, and the ability to generate new data samples.
 
-Key distinctions include:
+### **Key Differences: Standard AE vs VAE**
 
-### **Standard Autoencoder**
-- Maps input data deterministically to a fixed latent representation.
-- Lacks the ability to generate new samples or capture data variability.
+#### **Standard Autoencoder (AE):**
 
-### **Variational Autoencoder (VAE)**
-- Models the latent space as a **probability distribution**, typically Gaussian.
-- Enables sampling from the latent space for data generation.
-- Includes a **KL Divergence** term in the loss to regularize the latent space.
+- **Deterministic Mapping**: Encodes data to a fixed latent representation.
+- **No Sampling**: Outputs are reconstructed directly from deterministic encodings, preventing generative capabilities.
+- **Reconstruction Only**: Focuses solely on accurately reconstructing the input data without learning meaningful latent space properties.
 
-Here is an illustrative comparison:
+#### **Variational Autoencoder (VAE):**
+- **Probabilistic Mapping**: Encodes data into a latent distribution (mean and variance) rather than a fixed vector.
+- **Sampling Capabilities**: Enables generation of new data points by sampling from the learned latent space.
+- **Latent Space Regularization**: Introduces a **KL Divergence** loss term to enforce smoothness and continuity in the latent space.
 
-![AE vs VAE](assets/autoencoder_vs_vae.jpg)
+### **Why Probabilistic Latent Space?**
 
-The following sections explore the VAE structure, its mathematical formulation, and experimental results on the MNIST dataset.
+1. **Data Generation**: Sampling from a latent distribution allows VAEs to generate diverse outputs that resemble the training data.
+2. **Continuity**: Nearby points in the latent space correspond to similar outputs, ensuring smooth transitions in generated data.
+3. **Regularization**: The additional KL divergence term ensures the learned latent distribution aligns with a standard Gaussian, making the space interpretable and well-structured.
 
 ---
 
 ## **Core Concepts**
 
-### **Latent Space in VAE**
-In a standard AE, the encoder maps input data to a fixed latent vector. In contrast, VAE encodes inputs into a probabilistic distribution, allowing the latent space to:
+### **Mathematical Framework**
 
-1. **Encourage Continuity**: Similar inputs yield close latent encodings.
-2. **Enable Sampling**: Random samples from the distribution generate diverse and realistic outputs.
+The goal of a VAE is to optimize the evidence lower bound (ELBO) to approximate the true data likelihood \(p(x)\):
 
-Key advantages of this design:
-- Smoother latent space.
-- Improved generalization.
-- Capability to generate new, meaningful data.
+\[
+\log p(x) = \text{ELBO} + \text{KL}(q_\phi(z|x) || p(z|x))
+\]
 
-### **Mathematical Formulation**
+#### **1. Reconstruction Loss**
+Measures the difference between the original input \(x\) and its reconstruction \(\hat{x}\):
 
-The VAE loss combines two terms:
+- For continuous data: Mean Squared Error (MSE)
+- For binary data: Binary Cross-Entropy (BCE)
 
-1. **Reconstruction Loss**
-   Measures how accurately the model reconstructs the input data:
+This term ensures that the decoder reconstructs the input data accurately based on the latent representation.
 
-   \[
-   \mathcal{L}_{Recon} = \text{MSE}(x, \hat{x})
-   \]
+#### **2. KL Divergence Loss**
+Regularizes the latent space by minimizing the divergence between the learned posterior \(q_\phi(z|x)\) and the prior \(p(z)\):
 
-   or Binary Cross-Entropy (BCE) for binary inputs:
+\[
+D_{KL}(q_\phi(z|x) \parallel p(z)) = \int q_\phi(z|x) \log \frac{q_\phi(z|x)}{p(z)} dz
+\]
 
-   \[
-   \mathcal{L}_{Recon} = -\mathbb{E}_{q(z|x)} \left[\log p(x|z)\right]
-   \]
+This encourages the learned latent distribution to approximate a unit Gaussian (\(N(0,1)\)).
 
-2. **KL Divergence Loss**
-   Regularizes the latent space by enforcing similarity between the learned distribution \( q(z|x) \) and a standard Gaussian prior \( p(z) \):
-
-   \[
-   \mathcal{L}_{KL} = D_{KL}\left(q(z|x) \parallel p(z)\right)
-   \]
-
-   KL Divergence is given by:
-
-   \[
-   D_{KL}(P \parallel Q) = \sum P(x) \log\left(\frac{P(x)}{Q(x)}\right)
-   \]
-
-The total VAE loss is:
-
-![loss](assets/loss.jpg)
-
+#### **Combined Loss**
+The total VAE loss is a weighted sum of the reconstruction and KL divergence terms:
 
 \[
 \mathcal{L}_{VAE} = \mathcal{L}_{Recon} + \beta \cdot \mathcal{L}_{KL}
 \]
 
-Where \( \beta \) controls the weight of the KL term.
+Where \( \beta \) (beta-VAE) can adjust the balance between reconstruction accuracy and latent space regularization.
 
-![KL Divergence](assets/kl_divergence_visual.png)
+---
+
+### **Encoder and Decoder Roles**
+
+1. **Encoder**:
+   - Maps input data \(x\) to a latent distribution characterized by:
+     - Mean (\(\mu\)) 
+     - Variance (\(\sigma^2\))
+   - Outputs the parameters for sampling latent representations \(z \sim \mathcal{N}(\mu, \sigma^2)\).
+
+2. **Decoder**:
+   - Maps sampled latent vectors \(z\) back to the data space.
+   - Outputs the reconstructed data \(\hat{x}\).
+
+---
+
+### **Sampling with Reparameterization Trick**
+
+Since direct backpropagation through stochastic sampling is not feasible, VAEs employ the **reparameterization trick**:
+
+\[
+z = \mu + \sigma \cdot \epsilon
+\]
+
+Where \(\epsilon \sim \mathcal{N}(0, 1)\) is a random noise vector. This enables gradient-based optimization while allowing latent space sampling.
 
 ---
 
