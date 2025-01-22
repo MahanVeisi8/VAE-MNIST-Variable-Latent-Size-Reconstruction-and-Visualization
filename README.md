@@ -248,6 +248,11 @@ Sample reconstructions of test images at various latent sizes:
 | **4**          | 0.0025    | 0.9847    | 32.8133   |
 | **2**          | 0.0040    | 0.9803    | 30.5386   |
 
+## **Liked This Project?!**
+
+If you found this project exciting or helpful, please consider **starring it on GitHub**! ⭐  
+Your support helps inspire more innovative projects and keeps the momentum going. 🚀  
+
 
 
 ---
