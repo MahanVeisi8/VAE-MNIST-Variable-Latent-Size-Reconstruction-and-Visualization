@@ -82,23 +82,22 @@ Below are reconstructions of test images (samples 1–5) at various latent sizes
 ### 2. **Latent Space Visualizations**
 
 These visualizations highlight how the latent space evolves with different latent sizes. Each GIF shows the latent space for the test set during training.
-
 <table>
   <tr>
     <th>Latent Size</th>
-    <th>Latent Space Visualization</th>
+    <th colspan="3">Latent Space Visualization</th>
   </tr>
   <tr>
-    <td align="center">2</td>
-    <td><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="400"></td>
+    <td align="center">Latent 2</td>
+    <td colspan="3" align="center"><img src="assets/latent_2/test_latent_visualization.gif" alt="Latent Space 2" width="300"></td>
   </tr>
   <tr>
-    <td align="center">4</td>
-    <td><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="400"></td>
+    <td align="center">Latent 4</td>
+    <td colspan="3" align="center"><img src="assets/latent_4/test_latent_visualization.gif" alt="Latent Space 4" width="300"></td>
   </tr>
   <tr>
-    <td align="center">16</td>
-    <td><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="400"></td>
+    <td align="center">Latent 16</td>
+    <td colspan="3" align="center"><img src="assets/latent_16/test_latent_visualization.gif" alt="Latent Space 16" width="300"></td>
   </tr>
 </table>
 
